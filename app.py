@@ -28,10 +28,10 @@ elif item == 'item1':
         pv3.app()
    
 elif item == 'item2':
-    sub_item = st.sidebar.selectbox('추천 서비스 예시', ['추천1', '추천2', '추천3'])
-    if sub_item == '추천1':
+    sub_item = st.sidebar.selectbox('추천 서비스 예시', ['Top30', '선택Tag', 'MBTI'])
+    if sub_item == 'Top30':
         pr4.app()
-    elif sub_item == '추천2':
+    elif sub_item == '선택Tag':
         pr5.app()
-    elif sub_item == '추천3':
+    elif sub_item == 'MBTI':
         pr6.app()
