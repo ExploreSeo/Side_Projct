@@ -28,7 +28,7 @@ elif item == 'item1':
         pv3.app()
    
 elif item == 'item2':
-    sub_item = st.sidebar.selectbox('추천 서비스 예시', ['Top30', '선택Tag', 'MBTI'])
+    sub_item = st.sidebar.selectbox('추천 서비스 방식 3가지', ['Top30', '선택Tag', 'MBTI'])
     if sub_item == 'Top30':
         pr4.app()
     elif sub_item == '선택Tag':
