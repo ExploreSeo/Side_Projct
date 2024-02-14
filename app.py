@@ -36,4 +36,3 @@ elif item == 'item2':
     elif sub_item == 'MBTI':
         pr6.app()
 '''
-'''
