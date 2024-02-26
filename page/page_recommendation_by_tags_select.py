@@ -3,12 +3,12 @@ import math
 from utils import utils_recommendation_by_tags_select as ur_tags
 
 def app():
-
     st.subheader("저희가 선택한 테그 30개를 활용한 게임 추천 시스템")
 
     # 태그 선택 섹션
     st.markdown("선호하는 **태그**를 최대 3개까지 클릭해주세요")
 
+    # 태그 리스트
     tags = ['Indie', 'Action', 'Adventure', 'Early Access', 'Simulation',
             'Multiplayer', 'Singleplayer', 'Strategy', 'Sports', 'Open World',
             'Exploration', 'First-Person', 'Third Person', '2D', '3D',
@@ -43,6 +43,9 @@ def app():
     # 가격을 설정하는 슬라이더를 추가합니다.
     min_price, max_price = st.slider("가격 범위를 선택하세요", 0.0, 70.0, (0.0, 70.0), 0.1)
 
+    # 19세 이상 게임을 제외하는 체크박스를 추가합니다.
+    exclude_adult_game = st.checkbox("19세 이상 게임 제외하기")
+
     if st.button('다음 게임 추천'):
         if 'page_number' not in st.session_state:
             st.session_state.page_number = 1
@@ -53,6 +56,9 @@ def app():
         # 선택된 태그와 가격 범위에 기반한 게임 추천
         recommendations = ur_tags.recommend_games(selected_tags, page_number=st.session_state.page_number, games_per_page=5)
         recommendations = recommendations[(recommendations['Price'] >= min_price) & (recommendations['Price'] <= max_price)]  # 가격 범위 필터링
+        
+        if exclude_adult_game:
+            recommendations = recommendations[~recommendations['Tags'].str.contains('Hentai|NSFW|Nudity|Sexual Content')]
 
         if st.session_state.recommendation_index >= len(recommendations):
             st.session_state.recommendation_index = 0
@@ -68,7 +74,7 @@ def app():
 
             # 선택된 태그에 기반한 게임 출력 
             for _, game in page_games.iterrows():
-                st.text('---' * 15)
+                st.markdown("---")
                 # 이미지 가져오기
                 image_url = ur_tags.get_steam_game_image(game['AppID'])
                 # 이미지 출력
@@ -80,9 +86,9 @@ def app():
                 st.text(f"게임 이름: {game['Name']}")
                 st.text(f"게임 ID: {game['AppID']}")
                 st.text(f"가격: {game['Price']}")
-                st.text(f"장르: {game['Genres']}")
                 st.text(f"개발사: {game['Developers']}")
-                st.text(f"출판사: {game['Publishers']}")
+                st.text(f"공급사: {game['Publishers']}")
+                st.text(f"장르: {game['Genres']}")
                 st.text(f"태그: {game['Tags']}")
 
         # 페이지 번호 증가
