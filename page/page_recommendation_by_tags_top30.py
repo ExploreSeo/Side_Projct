@@ -5,8 +5,13 @@ from utils import utils_recommendation_by_tags_top30 as ur_tags
 st.set_page_config(page_title="Tag 기반 게임 추천 시스템", layout="wide")
 
 def app():
-    st.subheader("상위 빈도수 Top30 Tag를 이용한 게임 추천 시스템")
+    st.header("상위 빈도수 Top30 Tag를 이용한 게임 추천 시스템")
+    
+    st.text("\n" * 4)  # 엔터 4번을 통한 간격 조정
+    # 내용 추가
+    st.markdown("##### 빈도수가 높은 30개 TAG를 사용한 추천서비스")
 
+    
     # 태그 선택 섹션
     st.markdown("선호하는 :red[**태그**]를 클릭해주세요")
 

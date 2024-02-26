@@ -3,8 +3,17 @@ import math
 from utils import utils_recommendation_by_tags_select as ur_tags
 
 def app():
-    st.subheader("저희가 선택한 테그 30개를 활용한 게임 추천 시스템")
-
+    st.header("핵심 태그 30개를 활용한 게임 추천시스템")
+    
+    
+    st.text("\n" * 4)  # 엔터 4번을 통한 간격 조정
+    # 내용 추가
+    st.markdown('''
+                ##### 대표성이 없거나 유사한 태그끼리 병합처리하였습니다.
+                
+                ##### 게임 선정에 핵심이 되는 태그를 뽑았습니다.
+                ''')
+    
     # 태그 선택 섹션
     st.markdown("선호하는 **태그**를 최대 3개까지 클릭해주세요")
 
