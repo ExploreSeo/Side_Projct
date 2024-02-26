@@ -1,13 +1,20 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb 12 20:00:51 2024
+
+@author: goldg
+"""
+
 import streamlit as st
 import math
-from utils import utils_recommendation_by_tags_select as ur_tags
+from utils import utils_recommendation_by_tags_ver as ur_tags
 
 def app():
 
-    st.subheader("저희가 선택한 테그 30개를 활용한 게임 추천 시스템")
+    st.title("Tag를 활용한 차별화된 게임 추천 시스템")
 
     # 태그 선택 섹션
-    st.markdown("선호하는 **태그**를 최대 3개까지 클릭해주세요")
+    st.subheader("선호하는 태그를 클릭해주세요")
 
     tags = ['Indie', 'Action', 'Adventure', 'Early Access', 'Simulation',
             'Multiplayer', 'Singleplayer', 'Strategy', 'Sports', 'Open World',
@@ -35,14 +42,10 @@ def app():
                     if st.checkbox(tags[tag_index], key=tags[tag_index]):
                         selected_tags.append(tags[tag_index])
 
-    # 선택된 태그의 개수가 3개를 초과하는 경우 알림을 표시합니다.
-    if len(selected_tags) > 3:
-        st.warning("최대 3개의 태그만 선택할 수 있습니다.")
-        st.stop()  # 추가적인 처리를 멈춥니다.
-
     # 가격을 설정하는 슬라이더를 추가합니다.
-    min_price, max_price = st.slider("가격 범위를 선택하세요", 0.0, 70.0, (0.0, 70.0), 0.1)
+    min_price, max_price = st.slider("가격 범위를 선택하세요", 0.0, 100.0, (0.0, 100.0), 0.1)
 
+    
     if st.button('다음 게임 추천'):
         if 'page_number' not in st.session_state:
             st.session_state.page_number = 1

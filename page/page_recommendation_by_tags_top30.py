@@ -1,6 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb 12 00:07:02 2024
+
+@author: goldg
+"""
+
 import streamlit as st
 import math
-from utils import utils_recommendation_by_tags_top30 as ur_tags
+from utils import utils_recommendation_by_tags_ver as ur_tags
 
 st.set_page_config(page_title="Tag 기반 게임 추천 시스템", layout="wide")
 
@@ -8,7 +15,7 @@ def app():
     st.subheader("상위 빈도수 Top30 Tag를 이용한 게임 추천 시스템")
 
     # 태그 선택 섹션
-    st.markdown("선호하는 :red[**태그**]를 클릭해주세요")
+    st.markdown("선호하는 **태그**를 클릭해주세요")
 
     # 태그 빈도 계산
     tag_frequencies = ur_tags.calculate_tag_frequencies()
@@ -35,8 +42,9 @@ def app():
                     # 체크박스를 생성하고 선택된 경우 selected_tags에 추가합니다.
                     if st.checkbox(top_30_tags[tag_index], key=top_30_tags[tag_index]):
                         selected_tags.append(top_30_tags[tag_index])
+
     
-    if st.button('다음 게임 추천', type="primary"):
+    if st.button('다음 게임 추천'):
         if 'page_number' not in st.session_state:
             st.session_state.page_number = 1
             
@@ -60,7 +68,7 @@ def app():
 
             # 선택된 태그에 기반한 게임 출력 
             for _, game in page_games.iterrows():
-                st.text('---' * 30)
+                st.text('---' * 15)
                 # 이미지 가져오기
                 image_url = ur_tags.get_steam_game_image(game['AppID'])
                 # 이미지 출력
@@ -71,7 +79,6 @@ def app():
                 # 게임 정보 출력
                 st.text(f"게임 이름: {game['Name']}")
                 st.text(f"게임 ID: {game['AppID']}")
-                st.text(f"가격: {game['Price']}")
                 st.text(f"장르: {game['Genres']}")
                 st.text(f"개발사: {game['Developers']}")
                 st.text(f"출판사: {game['Publishers']}")

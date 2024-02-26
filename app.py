@@ -1,10 +1,11 @@
 import streamlit as st
 from page import intro
 from page import page_visual_metacritic as pv1
-from page import page_visual_total_review as pv2
-from page import page_visual_tag_genres_count as pv3
+from page import page_visual_developers as pv2
+from page import page_visual_tags as pv3
 from page import page_recommendation_by_tags_top30 as pr4
 from page import page_recommendation_by_tags_select as pr5
+from page import page_recommendation_by_tags_cosine as pr6
 
 st.title('Side_Project')
 
@@ -27,8 +28,13 @@ elif item == 'item1':
         pv3.app()
    
 elif item == 'item2':
-    sub_item = st.sidebar.selectbox('추천 서비스 예시', ['추천1', '추천2'])
-    if sub_item == '추천1':
+    sub_item = st.sidebar.selectbox('추천 서비스 방식 3가지', ['Top30', '선택Tag', 'MBTI'])
+    if sub_item == 'Top30':
         pr4.app()
-    elif sub_item == '추천2':
+    elif sub_item == '선택Tag':
         pr5.app()
+    elif sub_item == 'MBTI':
+        pr6.app()
+'''
+asd
+'''
